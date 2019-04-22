@@ -1,35 +1,39 @@
-table, th, td 
-{
-    margin: 10px 0;
-    border: solid 1px #333;
-    padding: 2px 4px;
-    font: 15px Verdana;
-}
-th {
-    font-weight:bold;
-}
-button {
-  /*  background-color:rgb(105, 123, 228);
-    color: white;
-    padding: 20px 20px;
-    margin: 6px 6px;
-    border: none;
-    cursor: pointer;
-    width: auto;
-    float: left;*/
- 
-   
-    text-transform: none;
-    padding:10px;
-    padding-left:15px;
-    padding-right:15px;
-     font-size: 20px;
-     width:120px;
-     color: #000;
-     background-color: rgb(94, 94, 221)
+import { Component, OnInit } from '@angular/core';
 
-/* color: white;*/
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-sector',
+  templateUrl: './sector.component.html',
+  styleUrls: ['./sector.component.css']
+})
+export class SectorComponent implements OnInit {
   
-   
-   
+
+  constructor(private httpService: HttpClient) { }
+  selectedOption: string;
+  title = ' My Portfolio';
+  arrBirds: string [];
+  arrayBirds: string [];
+  ngOnInit() {
+    this.httpService.get('./assets/Birds.json').subscribe(
+      data => {
+        this.arrBirds = data as string [];	 // FILL THE ARRAY WITH DATA.
+        //  console.log(this.arrBirds[1]);
+      },
+      (err: HttpErrorResponse) => {
+        console.log (err.message);
+      }
+    );
   }
+  showAlert(){
+   
+      this.arrayBirds= this.arrBirds;
+    
+     
+  }
+ 
+}
+
+  
